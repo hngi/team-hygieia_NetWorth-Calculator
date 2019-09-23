@@ -1,0 +1,18 @@
+<p>Name: <%=user.firstName%> <%=user.lastName%></p>
+    <p>Age: <%=user.age%></p>
+    <ul>
+        Assets: <% if(user.assets.length == 0){ %>
+            No asset
+       <% } else{ 
+            user.assets.forEach(function(asset){ %>
+            <li><%=asset%></li>
+       <% }) }%>
+    </ul>
+    <ul>
+        Liabilities: <% if(user.liabilities.length == 0){ %>
+            No liability
+       <% } else{ 
+            user.liabilities.forEach(function(liability){ %>
+            <li><%=liability%></li>
+       <% }) }%>
+    </ul>
