@@ -1,3 +1,4 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
 <?php
 
     class Auth extends CI_Controller{
@@ -5,7 +6,7 @@
        
 
             public function _construct(){
-
+                 header('Access-Control-Allow-Origin: *');
                 if($this->session->userdata('logged_in')){
     
                     $data=[
@@ -16,41 +17,47 @@
                     $data=json_encode($data);
                     echo $data;
                     
-                }else{
-    
-                    $this->load->view('auth/login');
                 }
             }
 
             public function login(){
 
-                $email=xss_clean($this->input->post('email'));
-                $password=xss_clean($this->input->post('password'));
-    
-                $result=$this->auth_model->login_user($email,do_hash($password));
-    
-                if (empty($result)) {
+                
+                if(empty($this->input->post('email')) || empty($this->input->post('password'))){
+
+                    $this->load->view('login');
+                }else{
+
+                    $email=xss_clean($this->input->post('email'));
+                    $password=xss_clean($this->input->post('password'));
+        
+                    $result=$this->auth_model->login_user($email,do_hash($password));
+
+                    if (empty($result)) {
                     
-                    $data=[
-                        'error'=>'Login not Successful',
-                        'success'=>'',
+                        $data=[
+                            'error'=>'Login not Successful',
+                            'success'=>'',
+                            
+                        ];
                         
-                    ];
+                        $data=json_encode($data);
+                        echo $data;
+                        
+        
+                    } else {
+                        $data=[
+                            'success'=>'login Successful',
+                            'error'=>''
+                        ];
+                        
+                        $data=json_encode($data);
+                        echo $data;
+                        $_SESSION['logged_in']=TRUE;
+                    }
                     
-                    $data=json_encode($data);
-                    echo $data;
-                    
-    
-                } else {
-                    $data=[
-                        'success'=>'login Successful',
-                        'error'=>''
-                    ];
-                    
-                    $data=json_encode($data);
-                    echo $data;
-                    $_SESSION['logged_in']=TRUE;
                 }
+
                 
             
         }
@@ -61,95 +68,102 @@
 
             if(empty($this->input->post('name')) || empty($this->input->post('email')) || empty($this->input->post('password'))){
                 
-                $data=[
-                    'error'=>'Invalid Input',
-                    'success'=>""
-                ];
-                //$this->load->view('register',$data);
-                echo json_encode($data);
+                
+                $this->load->view('register');
+                
                 
             }else{
 
-            $email=xss_clean($this->input->post('email'));
-            $name=xss_clean($this->input->post('name'));
-            $password=xss_clean($this->input->post('password'));
-            
-            if($this->auth_model->check_if_user_exists($name,$email)){
+                if($this->input->post('pass')==$this->input->post('password')){
 
-                $data=[
-                    'error'=>'User already exists',
-                    'success'=>""
-                ];
-                
-                echo json_encode($data);
-
-            }else{
-
-                $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
-
-            $letters = str_split($abc);
-            $user_id = "";
-            for ($i=0; $i<=12; $i++) {
-                $user_id .= $letters[rand(0, count($letters)-1)];
-            }
-
-                $verification_id=md5(time());
-                
-                $result=$this->auth_model->register_pending_user($name,$user_id,sha1($password),$email,$verification_id);
-
-
-                $to=$email;
-                    $subject="Account Verification";
-                    $message="
-                    <html>
-
-                    Hello,Please click on the link below to verify your account
-                    <a href='http://hygieianetworth.000webhostapp.com/auth/verify/". $verification_id."'>click!</a>
-                    </html>
+                    $data=[
+                        'error'=>'Passwords do not match',
+                        'success'=>""
+                    ];
                     
-                    ";
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                }else{  
 
+                $email=xss_clean($this->input->post('email'));
+                $name=xss_clean($this->input->post('name'));
+                $password=xss_clean($this->input->post('password'));
+                
+                if($this->auth_model->check_if_user_exists($name,$email)){
 
-                    if(mail($to,$subject,$message,$headers)){
-
-                        if($result){
-
-                        $data=[
-                            'success'=>'Your Account has been created.An email has been sent you to verify your email address',
-                            'error'=>""
-                        ];
-                        
-                        echo json_encode($data);
-                        
-                        }else{
-
-                            $data=[
-                                'error'=>'Internal Server Error',
-                                'success'=>""
-                            ];
-                            
-                            echo json_encode($data);
-                        }
-
-                    }else{
-                        
-                        $data=[
-                        'error'=>'Verification Email was not sent',
+                    $data=[
+                        'error'=>'User already exists',
                         'success'=>""
                     ];
                     
                     echo json_encode($data);
-                    }
-    
+
+                }else{
+
+                    $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
+
+                $letters = str_split($abc);
+                $user_id = "";
+                for ($i=0; $i<=12; $i++) {
+                    $user_id .= $letters[rand(0, count($letters)-1)];
+                }
+
+                    $verification_id=md5(time());
+                    
+                    $result=$this->auth_model->register_pending_user($name,$user_id,sha1($password),$email,$verification_id);
 
 
+                    $to=$email;
+                        $subject="Account Verification";
+                        $message="
+                        <html>
+
+                        Hello,Please click on the link below to verify your account
+                        <a href='http://hygieianetworth.000webhostapp.com/auth/verify/". $verification_id."'>click!</a>
+                        </html>
+                        
+                        ";
+                        $headers = "MIME-Version: 1.0" . "\r\n";
+                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        
+                        $headers = "MIME-Version: 1.0" . "\r\n";
+                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+                        if(/*mail($to,$subject,$message,$headers)*/ TRUE){
+
+                            if($result){
+
+                            $data=[
+                                'success'=>'Your Account has been created.An email has been sent you to verify your email address',
+                                'error'=>""
+                            ];
+                            
+                            echo json_encode($data);
+                            
+                            }else{
+
+                                $data=[
+                                    'error'=>'Internal Server Error',
+                                    'success'=>""
+                                ];
+                                
+                                echo json_encode($data);
+                            }
+
+                        }else{
+                            
+                            $data=[
+                            'error'=>'Verification Email was not sent',
+                            'success'=>""
+                        ];
+                        
+                        echo json_encode($data);
+                        }
+        
+
+
+                }
             }
-            
+                
         }
     }
 

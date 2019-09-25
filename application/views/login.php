@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/styles.css" type="text/css" />
     <!--<link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
@@ -13,6 +13,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
     />-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -48,17 +49,25 @@
           >
             <div class="d-flex flex-column w-50 justify-content-center">
               <h4 class="text-right mt-5">Log In</h4>
+              <div class="alert-box">
+					
+				</div>
+              <div class="spinner-border text-primary" role="status">
+					<span class="sr-only">Logging you in...</span>
+				  </div>
               <form class="pt-4" method="POST">
                 <div class="form-group">
                   <input
                     type="email"
                     class="form-control"
+                    name="email"
                     placeholder="Enter email"
                   />
                 </div>
                 <div class="form-group">
                   <input
                     type="password"
+                    name="password"
                     class="form-control"
                     placeholder="Password"
                   />
@@ -76,7 +85,7 @@
               </form>
             </div>
             <p class="text-right align-self-center pb-5 mb-5">
-              Don't have an account? <a href="./signup.html">Sign Up</a>
+              Don't have an account? <a href="<?php echo base_url()?>auth/register">Sign Up</a>
             </p>
           </div>
           <!-- End -->
@@ -85,3 +94,52 @@
     </section>
   </body>
 </html>
+
+
+
+
+<script>
+	$(document).ready(()=>{
+		$('.spinner-border').hide();
+	})
+	$('form').on('submit',(e)=>{
+		e.preventDefault();
+		$.ajax({
+			type:'POST',
+			url:'<?php echo base_url();?>auth/login',
+			dataType:'text',
+			data:$('form').serialize(),
+			beforeSend:()=>{
+				$('.spinner-border').show();
+				$('form').hide();
+                $('.alert-box').html('');
+			},
+			
+			success:(data)=>{
+				//console.log(data);
+				function succession(){
+					let result=JSON.parse(data);
+					$('.spinner-border').hide();
+					
+					
+					if(result['success'] !== ''){
+						$('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
+						
+					}else{
+						$('form').show();
+						$('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');
+					}
+				}
+				setTimeout(succession,3000);
+				
+			},
+			error:(err)=>{
+				$('.spinner-border').hide();
+				$('form').show();
+				console.log(err);
+			}
+		})
+	})
+</script>
+
+
