@@ -7,15 +7,16 @@
 
         public function check_if_user_exists($name,$email){
 
-            $query=$this->db->get_where('users',['name'=>$name,'email'=>$email]);
-
-            if($query->result_array()==NULL){
-                return FALSE;
-            }else{
-                return TRUE;
-            }
-        }
-
+            $query=$this->db->get_where('users',['name'=>$name]);
+             $query2=$this->db->get_where('users',['email'=>$email]);
+ 
+             if($query->result_array()==NULL && $query2->result_array()==NULL){
+                 return FALSE;
+             }else{
+                 return TRUE;
+             }
+         }
+ 
         public function register_user($user_id,$name,$password,$email){
 
             $data=[

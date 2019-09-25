@@ -2,42 +2,25 @@
 
     class Auth extends CI_Controller{
 
-        // public function _construct(){
+       
 
-        //     if($this->session->userdata('logged_in')){
+            public function _construct(){
 
-        //         $data=[
-        //             'error'=>'',
-        //             'success'=>'You are already logged in'
-        //         ];
-                
-        //         $data=json_encode($data);
-        //         echo $data;
-                
-        //     }else{
-
-        //         $this->load->view('auth/login');
-        //     }
-
-        // }
-
-            // public function index(){
-
-            //     if($this->session->userdata('logged_in')){
-
-            //         $data=[
-            //             'error'=>'',
-            //             'success'=>'You are already logged in'
-            //         ];
+                if($this->session->userdata('logged_in')){
+    
+                    $data=[
+                        'error'=>'',
+                        'success'=>'You are already logged in'
+                    ];
                     
-            //         $data=json_encode($data);
-            //         echo $data;
+                    $data=json_encode($data);
+                    echo $data;
                     
-            //     }else{
-
-            //         $this->load->view('auth/login');
-            //     }
-            // }
+                }else{
+    
+                    $this->load->view('auth/login');
+                }
+            }
 
             public function login(){
 
@@ -73,6 +56,8 @@
         }
 
         public function register(){
+
+
 
             if(empty($this->input->post('name')) || empty($this->input->post('email')) || empty($this->input->post('password'))){
                 
@@ -112,23 +97,55 @@
                 
                 $result=$this->auth_model->register_pending_user($name,$user_id,sha1($password),$email,$verification_id);
 
-                if($result){
 
-                    $data=[
-                        'success'=>'Your Account has been created.An email has been sent you to verify your email address',
-                        'error'=>""
-                    ];
+                $to=$email;
+                    $subject="Account Verification";
+                    $message="
+                    <html>
+
+                    Hello,Please click on the link below to verify your account
+                    <a href='http://hygieianetworth.000webhostapp.com/auth/verify/". $verification_id."'>click!</a>
+                    </html>
                     
-                    echo json_encode($data);
-                }else{
+                    ";
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-                    $data=[
-                        'error'=>'Internal Server Error',
+
+                    if(mail($to,$subject,$message,$headers)){
+
+                        if($result){
+
+                        $data=[
+                            'success'=>'Your Account has been created.An email has been sent you to verify your email address',
+                            'error'=>""
+                        ];
+                        
+                        echo json_encode($data);
+                        
+                        }else{
+
+                            $data=[
+                                'error'=>'Internal Server Error',
+                                'success'=>""
+                            ];
+                            
+                            echo json_encode($data);
+                        }
+
+                    }else{
+                        
+                        $data=[
+                        'error'=>'Verification Email was not sent',
                         'success'=>""
                     ];
                     
                     echo json_encode($data);
-                }
+                    }
+    
 
 
             }
