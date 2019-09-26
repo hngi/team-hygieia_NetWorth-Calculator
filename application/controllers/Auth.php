@@ -22,7 +22,7 @@
 
             public function login(){
 
-                
+                if(!($this->session->userdata('logged_in'))){
                 if(empty($this->input->post('email')) || empty($this->input->post('password'))){
 
                     $this->load->view('login');
@@ -51,15 +51,18 @@
                             'error'=>''
                         ];
                         
-                        $data=json_encode($data);
-                        echo $data;
+                        echo json_encode($data);
                         $_SESSION['logged_in']=TRUE;
+                        $_SESSION['user_id']=$result[0]['user_id'];
                     }
                     
                 }
 
                 
-            
+            }else{
+                $url=base_url().'asset';
+                redirect($url);
+            }
         }
 
         public function register(){
