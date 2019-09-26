@@ -1,101 +1,77 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/styles.css" type="text/css" />
-    <!--<link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />-->
-    <!--<link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    />-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <title>Hygieia || Log In</title>
-  </head>
-  <body>
-    <section class="jumbotron hero">
-      <div class="container">
-        <div class="row">
-          <!-- Linear Background -->
-          <div
-            class="col-sm-5 d-flex align-items-center justify-content-center linear"
-          >
-            <div
-              class="d-flex flex-column justify-content-center align-self-center"
-            >
-              <h3 class="text-center">Hygieia <br />Net Worth Calculator</h3>
-              <div class="text-center pt-4">
-                <p>Calculate Net Worth</p>
-                <p>Get your assets in one place</p>
-                <p>Summary of liabilities</p>
-              </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Poppins|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
+</head>
+<body>
+   <div class="container-fluid">
+       <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 form-container gradient-bg">
+                <div class="welcome">
+                   <h1 class="text-center hygieia">Hygieia<br> Net Worth Calculator</h1>
+                   <p class="details">Calculate your total net work</p>
+                   <p class="details">Get your total asset all in one place</p>
+                   <p class="details">Summary of your liabilities</p>
+                </div>
+                <div class="icon row justify-content-center">
+                    <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
             </div>
-          </div>
-
-          <!-- Sign Up -->
-          <div
-            class="col-sm-7 d-flex flex-column align-items-center justify-content-center"
-          >
-            <div class="d-flex flex-column w-50 justify-content-center">
-              <h4 class="text-right mt-5">Log In</h4>
-              <div class="alert-box">
+           <div class="col-md-6 form-container">
+           <div class="alert-box">
 					
-				</div>
-              <div class="spinner-border text-primary" role="status">
-					<span class="sr-only">Logging you in...</span>
-				  </div>
-              <form class="pt-4" method="POST">
-                <div class="form-group">
-                  <input
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    placeholder="Enter email"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="password"
-                    name="password"
-                    class="form-control"
-                    placeholder="Password"
-                  />
-                  <p class="text-right pt-2">
-                    <small>
-                      <a class="text-secondary" href="#">Forgot Password?</a>
-                    </small>
-                  </p>
-                </div>
-                <div class="text-right">
-                  <button type="submit" class="btn btn-info">
-                    Log In
-                  </button>
-                </div>
-              </form>
-            </div>
-            <p class="text-right align-self-center pb-5 mb-5">
-              Don't have an account? <a href="<?php echo base_url()?>auth/register">Sign Up</a>
-            </p>
           </div>
-          <!-- End -->
-        </div>
-      </div>
-    </section>
-  </body>
+                <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Logging you in...</span>
+            </div>
+                <form action="" method="post">
+                    <div class="form-group form-input">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" name="email" class="form-control" id="email-field" placeholder="Email*" name="email" required>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" name="password" class="form-control" id="password-field" placeholder="Password*" name="password" required>
+                        </div>
+                    </div>
+                    <div class="forgot text-right">
+                         <a href="">Forgot Password?</a>
+                    </div>
+                    <div class="sign-in">
+                        <button class="btn btn-primary btn-block">Login</button>
+                    </div>
+                    <div class="sign-up text-center">
+                        <p>Don't have an account? <a href="<?php echo base_url()?>auth/register"><span class="sign">Sign Up</span></a></p>
+                    </div>
+                </form>
+           </div>
+       </div>
+   </div>
+   <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url();?>assets/js/script.js"></script> 
+</body>
 </html>
-
-
 
 
 <script>
@@ -124,7 +100,7 @@
 					
 					if(result['success'] !== ''){
 						$('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
-						
+						window.location.assign("<?php echo base_url();?>asset");
 					}else{
 						$('form').show();
 						$('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');

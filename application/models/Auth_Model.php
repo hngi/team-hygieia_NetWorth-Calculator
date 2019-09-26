@@ -112,7 +112,131 @@
         }
 
         
+        public function add_asset_to_db($user_id,$name,$value){
 
+            $data=[
+
+                'user_id'=>$user_id,
+                'asset_name'=>$name,
+                'asset_value'=>$value,
+                'date'=>date("l jS \of F Y h:i:s A")
+            ];
+
+            $query=$this->db->insert('assets',$data);
+
+            if($query){
+
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
+        public function add_liability_to_db($user_id,$name,$value){
+
+            $data=[
+
+                'user_id'=>$user_id,
+                'liability_name'=>$name,
+                'liability_value'=>$value,
+                'date'=>date("l jS \of F Y h:i:s A")
+            ];
+
+            $query=$this->db->insert('liabilities',$data);
+
+            if($query){
+
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        
+        public function remove_liability($name,$user_id){
+
+            if($this->db->delete('liabilities',['liability_name'=>$name,'user_id'=>$user_id])){
+
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        }
+
+
+        public function remove_asset($name,$user_id){
+
+            if($this->db->delete('assets',['asset_name'=>$name,'user_id'=>$user_id])){
+
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        }
+
+        public function check_if_asset_exists($user_id,$asset){
+
+            
+             $query=$this->db->get_where('assets',['user_id'=>$user_id,'asset_name'=>$asset]);
+ 
+             if(empty($query->result_array())){
+                 return FALSE;
+             }else{
+                 return TRUE;
+             }
+         }
+
+         public function check_if_liability_exists($user_id,$asset){
+
+            
+            $query=$this->db->get_where('liabilities',['user_id'=>$user_id,'liability_name'=>$asset]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return TRUE;
+            }
+        }
+
+        public function find_user($user_id){
+
+            $query=$this->db->get_where('users',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
+        }
+
+        public function find_asset($user_id){
+
+            $query=$this->db->get_where('assets',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
+        }
+
+
+        public function find_liability($user_id){
+
+            $query=$this->db->get_where('liabilities',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
+        }
     }
 
 
