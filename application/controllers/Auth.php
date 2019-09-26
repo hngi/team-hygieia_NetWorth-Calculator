@@ -20,6 +20,14 @@
                 }
             }
 
+            public function logout(){
+
+                session_unset();
+                session_destroy();
+                redirect(base_url());
+            }
+
+
             public function login(){
 
                 if(!($this->session->userdata('logged_in'))){

@@ -20,8 +20,44 @@
                 redirect(base_url());
                 
             }else{
+                $result=$this->auth_model->find_user($this->session->userdata('user_id'));
+                $result2=$this->auth_model->find_asset($this->session->userdata('user_id'));
+                $result3=$this->auth_model->find_liability($this->session->userdata('user_id'));
 
-                $this->load->view('asset');
+                if($result==FALSE  ){
+                    redirect(base_url());
+                }
+
+                if($result3==FALSE){
+                    $liability_count=0;
+                }else{
+                    $liability_count=count($result3);
+                }
+
+                if($result2!==FALSE){
+                    
+                    $total_asset='';
+                    foreach ($result2 as  $value) {
+                        
+                        $total_asset+=$value['asset_value'];
+                    }
+                    $asset_count=count($result2);
+
+                }else{
+                    $total_asset=0;
+                    $asset_count=0;
+                }
+
+                
+                $data=[
+                    'name'=>$result[0]['name'],
+                    'email'=>$result[0]['email'],
+                    'assets'=>$result2,
+                    'total_asset'=>$total_asset,
+                    'asset_count'=>$asset_count,
+                    'liability_count'=>$liability_count
+                ];
+                $this->load->view('asset',$data);
 
             }
         }
@@ -101,8 +137,8 @@
                 if(empty($this->input->post('asset_name'))  || empty($this->session->userdata('user_id'))){
 
                     $data=[
-                        'success'=>'Invalid input',
-                        'error'=>''
+                        'success'=>$this->input->post('asset_name'),
+                        'error'=>'Invalid input'
                     ];
                     
                     echo json_encode($data);
@@ -121,6 +157,7 @@
                                 'success'=>'Asset removed Sccessfully',
                                 'error'=>''
                             ];
+                            redirect(base_url().'asset');
                             
                             echo json_encode($data);
                         }else{

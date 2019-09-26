@@ -118,7 +118,8 @@
 
                 'user_id'=>$user_id,
                 'asset_name'=>$name,
-                'asset_value'=>$value
+                'asset_value'=>$value,
+                'date'=>date("l jS \of F Y h:i:s A")
             ];
 
             $query=$this->db->insert('assets',$data);
@@ -138,7 +139,8 @@
 
                 'user_id'=>$user_id,
                 'liability_name'=>$name,
-                'liability_value'=>$value
+                'liability_value'=>$value,
+                'date'=>date("l jS \of F Y h:i:s A")
             ];
 
             $query=$this->db->insert('liabilities',$data);
@@ -180,7 +182,7 @@
             
              $query=$this->db->get_where('assets',['user_id'=>$user_id,'asset_name'=>$asset]);
  
-             if($query->result_array()==NULL){
+             if(empty($query->result_array())){
                  return FALSE;
              }else{
                  return TRUE;
@@ -197,6 +199,43 @@
             }else{
                 return TRUE;
             }
+        }
+
+        public function find_user($user_id){
+
+            $query=$this->db->get_where('users',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
+        }
+
+        public function find_asset($user_id){
+
+            $query=$this->db->get_where('assets',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
+        }
+
+
+        public function find_liability($user_id){
+
+            $query=$this->db->get_where('liabilities',['user_id'=>$user_id]);
+
+            if($query->result_array()==NULL){
+                return FALSE;
+            }else{
+                return $query->result_array();
+            }
+
         }
     }
 

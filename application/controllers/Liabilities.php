@@ -21,7 +21,47 @@
                 
             }else{
 
-                $this->load->view('liability');
+
+                $result=$this->auth_model->find_user($this->session->userdata('user_id'));
+                $result2=$this->auth_model->find_asset($this->session->userdata('user_id'));
+                $result3=$this->auth_model->find_liability($this->session->userdata('user_id'));
+
+                if($result==FALSE){
+
+                    redirect(base_url());
+                }
+
+                if($result2==FALSE){
+
+                    $asset_count=0;
+                }else{
+                    $asset_count=count($result2);
+                }
+
+                if($result3!==FALSE){
+
+                    $total_liability='';
+                    foreach ($result3 as  $value) {
+                        
+                        $total_liability+=$value['liability_value'];
+                    }
+                    $liability_count=count($result3);
+                }else{
+
+                    $total_liability=0;
+                    $liability_count=0;
+                }
+
+                $data=[
+                    'name'=>$result[0]['name'],
+                    'email'=>$result[0]['email'],
+                    'liabilities'=>$result3,
+                    'total_liability'=>$total_liability,
+                    'asset_count'=>$asset_count,
+                    'liability_count'=>$liability_count
+                ];
+
+                $this->load->view('liability',$data);
 
             }
         }
@@ -38,8 +78,8 @@
                 if(empty($this->input->post('liability_name')) || empty($this->input->post('liability_value')) || !(is_numeric($this->input->post('liability_value')))){
 
                     $data=[
-                        'success'=>'Invalid input',
-                        'error'=>''
+                        'success'=>'',
+                        'error'=>'Invalid input'
                     ];
                     
                     echo json_encode($data);
@@ -121,7 +161,7 @@
                                 'success'=>'Liability removed Sccessfully',
                                 'error'=>''
                             ];
-                            
+                            redirect(base_url().'liabilities');
                             echo json_encode($data);
                         }else{
 
