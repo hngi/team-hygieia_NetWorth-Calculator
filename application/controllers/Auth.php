@@ -68,7 +68,7 @@
 
                 
             }else{
-                $url=base_url().'asset';
+                $url=base_url().'asset/overview';
                 redirect($url);
             }
         }

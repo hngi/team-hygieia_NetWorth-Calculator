@@ -2,21 +2,21 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Liabilities</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/styles.css">
 
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/popper.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="row">
 	<nav class="col-md-3 d-none d-md-block bg-light sidebar">
 		<div class="sidebar-sticky">
-			<a href="#" class="navbar-brand">Hygeieia NW Calc</a>
+			<a href="<?php echo base_url();?>asset/overview" class="navbar-brand">Hygeieia NW Calc</a>
 			<hr>			
 			<ul class="nav-flex-column">
 				<li class="nav-item">
@@ -51,55 +51,32 @@
 		<h2 style="text-align: center;">Overview</h2>
 		<hr>
 		<div class="container">
-            <h4 class="text-left">Add Your Current Liabilities</h4>
-            <div class="alert-box">
-					
-          </div>
-                <div class="spinner-border text-primary text-center" role="status">
-            <span class="sr-only">Loading...</span>
-            </div>
-				<form class="form-inline">
-					<div class="form-group mb-2">
-					<input class="form-control" type="text" id="liability_name" placeholder="Liability Name">
-					</div>
-					<div class="form-group mb-2">
-					<input class="form-control" type="number" id="liability_value" placeholder="Liability Value">
-					</div>
-					<input type="submit" class="btn btn-primary mb-2" id="add" value="ADD" name="">
-				</form>
-			<h3 id="netassets"><span class="h-text">Total Liability Value </span><span class="naira">N</span><span class="figure"><?=$total_liability?></span></h3>
-			<table id="valueTable" class="table">
+			<h4 class="text-left">Total</h4>
+			<table id="summaryTable" class="table">
 				<thead>
 					<tr>
-					<th class="top" scope="col">Items</th>
-					<th class="top" scope="col">Value</th>
-					<th class="top" scope="col">Date</th>	
+					<th class="top" scope="col">Assets</th>
+					<th class="top liabcol" scope="col">Liabilities</th>	
 					</tr>
 
 				</thead>
 				<tbody>
-                    <?php if (!empty($liabilities)): ?>
-                        <?php foreach ($liabilities as $liability): ?>
-                            <tr>
-                                <td><?=$liability['liability_name']?></td>
-                                <td><?=$liability['liability_value']?></td>
-                                <td><?=$liability['date']?></td>
-                                <td>
-                                <form action="<?php echo base_url();?>liabilities/remove_liability" method="POST">
-                                <input type="text" hidden name="liability_name"  value="<?=$liability['liability_name']?>">
-                                <button class="btn btn-danger" id="<?=$liability['liability_name']?>">DELETE</button>
-                                </form>
-                                
-                                </td>
-
-                            </tr>
-                        <?php endforeach; ?>
-                        <?php else: ?>
-                        <p>You have no liability yet</p>
-                        <?php endif; ?>
-					
+					<tr>
+						<td><span class="naira">N</span>
+							<span class="figure"><?=$total_asset?></span>
+							<br>
+							<a href="<?php echo base_url()?>asset" style="font-size: 0.7em; float: right;" class="text-right">Show details</a>
+						</td>
+						<td class="liabcol"><span class="naira">N</span>
+							<span class="figure"><?=$total_liability?></span>
+							<br>
+							<a href="<?php echo base_url()?>liabilities" style="font-size: 0.7em; float: right;" class="text-right">Show details</a>
+						</td>
+					</tr>
 				</tbody>
 			</table>
+			<h3 id="networth"><span class="h-text">Net Worth </span><span class="naira">N</span><span class="figure"><?=$net_worth?></span></h3>
+			
 		</div>
 		
 
@@ -107,15 +84,16 @@
 
 	<nav class="col-md-3 d-none d-md-block sidebar">
 		<div class="sidebar-sticky nav-right">
-			<img src="assets/img/avatar.svg">
-			<h3><?php echo $name?></h3>
-			<p><?php echo $email?></p>
-			<p><a href="<?php base_url();?>auth/logout">Logout</a></p>
+			<img src="<?php echo base_url();?>assets/img/avatar.svg">
+			<h3><?=$name?></h3>
+			<p><?=$email?></p>
+			<p><a href="">Logout</a></p>
 			<hr>			
 			<p>Summary</p>
 			<p class="summaryText">Assets <span class="text-right"><?=$asset_count?></span></p>
 			<p style="color:#6B4F81" class="summaryText">Liabilities<span class="text-right"><?=$liability_count?></span> </p>
 
+				
 		</div>
 			<img id="live-chat" src="<?php echo base_url();?>assets/img/live-chat.svg">
 		</nav>
@@ -124,117 +102,3 @@
 
 </body>
 </html>
-
-
-
-<script>
-
-$(document).ready(()=>{
-	$('.spinner-border').hide();
-})
-
-		$('#add').on('click',()=>{
-
-			$('form').on('submit',(e)=>{
-			e.preventDefault();
-			
-			$.ajax({
-				type:'POST',
-				url:'<?php echo base_url();?>liabilities/add_liability',
-				dataType:'text',
-				data:{
-					liability_name:$('#liability_name').val(),
-					liability_value:$('#liability_value').val()
-				},
-				beforeSend:()=>{
-					$('.spinner-border').show();
-					$('form').hide();
-					$('.alert-box').html('');
-					console.log($('#liability_value').val());
-				},
-				
-				success:(data)=>{
-					//console.log(data);
-					function succession(){
-						let result=JSON.parse(data);
-						$('.spinner-border').hide();
-						
-						
-						if(result['success'] !== ''){
-							$('form').show();
-							$('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
-							location.reload();
-						}else{
-							$('form').show();
-							$('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');
-						}
-					}
-					setTimeout(succession,3000);
-					
-				},
-				error:(err)=>{
-					$('.spinner-border').hide();
-					$('form').show();
-					console.log(err);
-				}
-			})
-		
-		})
-
-
-
-		})
-		
-
-
-// $('.btn-danger').on('click',()=>{
-
-// $('form').on('submit',(e)=>{
-// e.preventDefault();
-
-// $.ajax({
-//     type:'POST',
-//     url:'<?php echo base_url();?>liabilities/remove_liability',
-//     dataType:'text',
-//     data:{
-//         liability_name:$()
-//     },
-//     beforeSend:()=>{
-//         $('.spinner-border').show();
-//         $('form').hide();
-//         $('.alert-box').html('');
-//     },
-    
-//     success:(data)=>{
-//         //console.log(data);
-//         function succession(){
-//             let result=JSON.parse(data);
-//             $('.spinner-border').hide();
-            
-            
-//             if(result['success'] !== ''){
-//                 $('form').show();
-//                 $('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
-//                 location.reload();
-//             }else{
-//                 $('form').show();
-//                 $('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');
-//             }
-//         }
-//         setTimeout(succession,3000);
-        
-//     },
-//     error:(err)=>{
-//         $('.spinner-border').hide();
-//         $('form').show();
-//         console.log(err);
-//     }
-// })
-
-// })
-
-
-
-// })
-
-</script>
