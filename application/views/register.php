@@ -1,105 +1,72 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/styles.css" type="text/css" />
-    <!--<link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />-->
-    <!--<link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    />-->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Poppins|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-    <title>Hygieia || Sign Up</title>
-  </head>
-  <body>
-    <section class="jumbotron hero">
-      <div class="container">
-        <div class="row">
-          <!-- Sign Up -->
-          <div
-            class="col-sm-7 d-flex flex-column align-items-center justify-content-center"
-          >
-            <div class="d-flex flex-column w-50 justify-content-center">
-              <h4 class="text-left mt-5">Sign Up</h4>
-              <div class="alert-box">
+</head>
+<body>
+   <div class="container-fluid">
+       <div class="row">
+            <div class="col-md-1"></div>
+           <div class="col-md-6 adjust form-container">
+           <div class="alert-box">
 					
-				</div>
-              <div class="spinner-border text-primary" role="status">
-					<span class="sr-only">Signing you up...</span>
-				  </div>
-              <form class="pt-4" method="POST">
-                <div class="form-group">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Enter email"
-                    name="email"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter your Name"
-                    name="name"
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Password"
-                    name="password"
-                    id="pass1"
-                  />
-                </div>
-                
-                <div class="text-right">
-                  <button type="submit" class="btn btn-info">
-                    Sign Up
-                  </button>
-                </div>
-              </form>
-            </div>
-            <p class="text-right align-self-center pb-5 mb-5">
-              Already have an account? <a href="<?php echo base_url()?>">Sign In</a>
-            </p>
           </div>
-
-          <!-- Linear Background -->
-          <div
-            class="col-sm-5 d-flex align-items-center justify-content-center linear"
-          >
-            <div
-              class="d-flex flex-column justify-content-center align-self-center"
-            >
-              <h3 class="text-center">Hygieia <br />Net Worth Calculator</h3>
-              <div class="text-center pt-4">
-                <p>Calculate Net Worth</p>
-                <p>Get your assets in one place</p>
-                <p>Summary of liabilities</p>
-              </div>
+                <div class="spinner-border text-primary text-center" role="status">
+            <span class="sr-only">Signing you up...</span>
             </div>
-          </div>
-          <!-- End -->
-        </div>
-      </div>
-    </section>
-  </body>
+                <form action="" method="post">
+                    <div class="form-group form-input">
+                        
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="last-name-field" placeholder="Your Name*" name="name" minlength="4" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="email-field" placeholder="Email*" name="email" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password-field" placeholder="Password*" name="password" required>
+                        </div>
+                    </div>
+                    <div class="sign-in">
+                        <button class="btn btn-primary btn-block">Sign up</button>
+                    </div>
+                    
+                </form>
+                <div class="sign-up text-center">
+                        <p>Already a member? <a href="<?php echo base_url()?>"><span class="sign">Sign in</span></a></p>
+                    </div>
+           </div>
+           <div class="col-md-4 form-container gradient-bg">
+                <div class="welcome">
+                   <h1 class="text-center hygieia">Hygieia<br> Net Worth Calculator</h1>
+                   <p class="details">Calculate your total net work</p>
+                   <p class="details">Get your total asset all in one place</p>
+                   <p class="details">Summary of your liabilities</p>
+                </div>
+                <div class="icon row justify-content-center">
+                    <i class="fas fa-arrow-alt-circle-left fa-2x"></i>
+                </div>
+            </div>
+       </div>
+   </div> 
+</body>
 </html>
+
+
+
+
+
 
 
 

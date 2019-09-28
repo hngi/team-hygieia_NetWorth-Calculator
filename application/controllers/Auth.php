@@ -20,9 +20,17 @@
                 }
             }
 
+            public function logout(){
+
+                session_unset();
+                session_destroy();
+                redirect(base_url());
+            }
+
+
             public function login(){
 
-                
+                if(!($this->session->userdata('logged_in'))){
                 if(empty($this->input->post('email')) || empty($this->input->post('password'))){
 
                     $this->load->view('login');
@@ -51,15 +59,18 @@
                             'error'=>''
                         ];
                         
-                        $data=json_encode($data);
-                        echo $data;
+                        echo json_encode($data);
                         $_SESSION['logged_in']=TRUE;
+                        $_SESSION['user_id']=$result[0]['user_id'];
                     }
                     
                 }
 
                 
-            
+            }else{
+                $url=base_url().'asset/overview';
+                redirect($url);
+            }
         }
 
         public function register(){
