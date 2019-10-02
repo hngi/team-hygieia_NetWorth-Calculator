@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Assets</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/styles.css">
 
@@ -123,6 +123,15 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 <script>
