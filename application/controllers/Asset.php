@@ -241,5 +241,73 @@
                 }
     }
 }
+
+
+            public function generate_report(){
+                if(!($this->session->userdata('logged_in'))){
+
+                    redirect(base_url());
+                }else{
+
+                    if(empty($this->session->userdata('user_id'))){
+                        redirect(base_url());
+
+                    }else{
+
+                        $result=$this->auth_model->find_user($this->session->userdata('user_id'));
+                        $result2=$this->auth_model->find_asset($this->session->userdata('user_id'));
+                        $result3=$this->auth_model->find_liability($this->session->userdata('user_id'));
+        
+                        if($result==FALSE){
+                            redirect(base_url());
+                        }
+        
+                        if($result2!==FALSE){
+                            
+                            $total_asset='';
+                            foreach ($result2 as  $value) {
+                                
+                                $total_asset+=$value['asset_value'];
+                            }
+                            $asset_count=count($result2);
+        
+                        }else{
+                            $total_asset=0;
+                            $asset_count=0;
+                        }
+        
+        
+                        if($result3!==FALSE){
+                            
+                            $total_liability='';
+                            foreach ($result3 as  $value) {
+                                
+                                $total_liability+=$value['liability_value'];
+                            }
+                            $liability_count=count($result3);
+        
+                        }else{
+                            $total_liability=0;
+                            $liability_count=0;
+                        }
+        
+        
+                        $data=[
+                            'name'=>$result[0]['name'],
+                            'email'=>$result[0]['email'],
+                            'total_asset'=>$total_asset,
+                            'asset_count'=>$asset_count,
+                            'liability_count'=>$liability_count,
+                            'total_liability'=>$total_liability,
+                            'net_worth'=>($total_asset-$total_liability),
+                            'assets'=>$result2,
+                            'liabilities'=>$result3
+                        ];
+                        $this->load->view('networth_report',$data);
+                    }
+                    }
+                }
+            
     }
+
 ?>

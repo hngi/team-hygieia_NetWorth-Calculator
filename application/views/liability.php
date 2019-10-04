@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -32,6 +32,7 @@
 						<svg width="29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.875 29.0625H4.6875C5.20453 29.0625 5.625 28.642 5.625 28.125V27.1875H16.2216C18.5766 27.1875 20.8777 26.5275 22.8745 25.2797C25.8853 23.3977 27.9661 20.3128 28.5834 16.8159L28.7869 15.6637C28.8778 15.1491 28.7377 14.6241 28.4016 14.2237C28.0655 13.8234 27.5728 13.5937 27.0502 13.5937C26.7647 13.5937 26.4928 13.6645 26.25 13.7883V11.7187H26.7187C26.9081 11.7187 27.0797 11.6044 27.1519 11.4295C27.2245 11.2542 27.1842 11.0527 27.0502 10.9186L23.3002 7.16859C23.1169 6.98531 22.8206 6.98531 22.6373 7.16859L21.5625 8.24344V1.875C21.5625 1.61625 21.353 1.40625 21.0937 1.40625H16.4062C16.147 1.40625 15.9375 1.61625 15.9375 1.875V7.03125H14.0381C13.6814 6.24656 13.4175 5.78765 13.2056 5.5214L14.3902 2.6264C14.5219 2.31 14.445 1.95422 14.1942 1.72031C13.9434 1.48594 13.583 1.43484 13.2769 1.58765L12.3905 2.03062L11.8322 1.28625C11.6911 1.09781 11.4755 0.979685 11.2406 0.96281C11.0053 0.945466 10.7752 1.03125 10.6069 1.19859L9.89391 1.91109L9.42562 1.28625C9.28406 1.09734 9.06844 0.979685 8.83312 0.96281C8.59828 0.945466 8.36719 1.03172 8.20031 1.19859L7.30078 2.09812L5.94891 1.71187C5.63156 1.62094 5.29641 1.72875 5.09156 1.98515C4.88625 2.24156 4.85484 2.59359 5.01188 2.88094L6.42937 5.49797C5.43422 6.39703 4.21875 8.92312 4.21875 11.2186V12.6562C4.21875 14.2073 5.48016 15.4687 7.03125 15.4687H12.1875H16.4062H20.1562H25.0228L24.0328 17.4492L21.4552 18.5541C21.1659 17.587 20.2786 16.875 19.2187 16.875H12.4702C10.0308 16.875 7.68375 17.5472 5.625 18.8184V17.8125C5.625 17.2955 5.20453 16.875 4.6875 16.875H1.875C1.35797 16.875 0.9375 17.2955 0.9375 17.8125V28.125C0.9375 28.642 1.35797 29.0625 1.875 29.0625ZM7.11422 3.02015C7.39781 3.10125 7.70391 3.0225 7.91203 2.81344L8.76187 1.96359L9.23062 2.58937C9.37266 2.77781 9.58875 2.89594 9.82406 2.91234C10.0622 2.92781 10.2891 2.8425 10.4555 2.67609L11.1684 1.96359L11.7033 2.67609C11.9381 2.99109 12.3637 3.09234 12.7167 2.91609L13.3987 2.57484L12.3412 5.15625H11.0709L11.6691 3.95953L10.8305 3.54L10.0228 5.15625H9.20109L8.54766 3.79687L7.7025 4.20328L8.16047 5.15625H7.31016L5.9775 2.69531L7.11422 3.02015ZM11.7187 7.5V14.5312H7.03125C5.99719 14.5312 5.15625 13.6903 5.15625 12.6562V11.2186C5.15625 8.70937 6.70922 6.36937 7.15359 6.09375H12.4631C12.5391 6.18562 12.7111 6.43219 13.0022 7.03125H12.1875C11.9283 7.03125 11.7187 7.24125 11.7187 7.5ZM12.6562 7.96875H15.9375V14.5312H12.6562V7.96875ZM22.9687 8.16281L25.5872 10.7812H20.3503L22.9687 8.16281ZM16.875 2.34375H20.625V9.18094L18.8873 10.9186C18.7533 11.0527 18.713 11.2542 18.7856 11.4295C18.8578 11.6044 19.0294 11.7187 19.2187 11.7187H19.6875V14.5312H16.875V2.34375ZM20.625 11.7187H25.3125V14.5312H24.375V12.6562C24.375 12.3975 24.1655 12.1875 23.9062 12.1875H22.0312C21.772 12.1875 21.5625 12.3975 21.5625 12.6562V14.5312H20.625V11.7187ZM23.4375 14.5312H22.5V13.125H23.4375V14.5312ZM12.4702 17.8125H19.2187C19.9941 17.8125 20.625 18.4434 20.625 19.2187C20.625 19.9941 19.9941 20.625 19.2187 20.625H11.7187V21.5625H19.2187C20.4005 21.5625 21.3708 20.6803 21.5297 19.5417L24.5592 18.2433C24.6614 18.1997 24.7448 18.1214 24.7941 18.022L26.3109 14.9878C26.4525 14.7061 26.7352 14.5312 27.0502 14.5312C27.2948 14.5312 27.5259 14.6386 27.6834 14.8266C27.8409 15.0145 27.907 15.2602 27.8644 15.5011L27.6609 16.6533C27.0895 19.8891 25.1644 22.7433 22.3777 24.4847C20.5298 25.6397 18.4012 26.25 16.2216 26.25H5.625V19.9397C7.64953 18.5512 10.0092 17.8125 12.4702 17.8125ZM1.875 17.8125H4.6875L4.68797 28.125H1.875V17.8125Z" fill="#6B4F81" fill-opacity="0.5"/>
 </svg>
+
  							Assets
 					</a>
 				</li>
@@ -127,6 +128,154 @@
 
 
 
+
+ -->
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Hygieia-NetWorth Calculator</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="<?php base_url();?>css/index.css">
+		<link rel="stylesheet" href="<?php base_url();?>css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<div class="container-flex">
+			<div class="row holder">
+				<div class="col-sm-3 left">
+					<div class="title">
+						<div class="title-btn">
+							<h3>Hygieia NW Calc</h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					
+					<hr style="margin-top: 105px;">
+					<div class="navigation">
+						<ul class="nav nav-pills nav-stacked">
+							<a href="<?php base_url();?>asset/overview"><li><img src="<?php base_url();?>img/overview.png" class="img-icon"> Overview</li></a>
+							<a href="<?php base_url();?>asset"><li><img src="<?php base_url();?>img/assets.png" class="img-icon">Asset</li></a>
+							<a href="<?php base_url();?>liabilities"><li class="active"><img src="<?php base_url();?>img/liab.png" class="img-icon">Liabilities</li></a>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 mid">
+					<div class="title2">
+						<h3>LIABILITIES</h3>
+						<hr class="hr">
+					</div>
+					
+						<div class="total">
+							<h4 style="font-weight: normal;">Add your current Liabilities.</h4>
+						</div>
+					<div class="row heading">
+						<div class="col-sm-12">
+							<div class="alert-box">
+								
+							</div>
+							<div class="spinner-border text-primary text-center" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+							<div class="form" style="text-align: center;">
+								<form  method="post" class="form-inline">
+									<div class="form-group">
+										<input type="text" class="form-control" id="liability_name" placeholder="Liability Name">
+									</div>
+									<div class="form-group">
+										<input type= "Number" class="form-control" id="liability_value" placeholder="Liability value">
+									</div>
+									<button class="btn" name="submit" id="add" style="background: #257BFF; color: white;">ADD</button>
+								</form>
+							</div>
+						</div>
+						<div class="col-sm-12 net">
+								<h3>TOTAL LIABILITY VALUE <span><span class="naira">N</span><?=$total_liability?></span></h3>
+						</div>
+						<div class="col-sm-12 tab">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover text-center">
+									<tr class="tr-1">
+										<th>ITEMS</th>
+										<th>PRICE</th>
+										<th>DATE</th>
+									</tr>
+									
+									<?php if (!empty($liabilities)): ?>
+									<?php foreach ($liabilities as $liability): ?>
+										<tr>
+											<td><?=$liability['liability_name']?></td>
+											<td><?=$liability['liability_value']?></td>
+											<td><?=$liability['date']?></td>
+											<td>
+											<form action="<?php echo base_url();?>liabilities/remove_liability" method="POST">
+											<input type="text" hidden name="liability_name"  value="<?=$liability['liability_name']?>">
+											<button class="btn btn-danger" id="<?=$liability['liability_name']?>">DELETE</button>
+											</form>
+											
+											</td>
+
+										</tr>
+									<?php endforeach; ?>
+									<?php else: ?>
+									<p>You have no liability yet</p>
+									<?php endif; ?>
+									
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php base_url();?>img/userpic.png">
+					</div>
+					<div class = "user text-center">
+						<h4><?php echo $name?></h4>
+						<h5><?php echo $email?></h5>
+						<button class="btn"><a href="<?php base_url();?>auth/logout">Logout</a></button>
+					</div>
+					<hr>
+					<div class="sum">
+						<h4>SUMMARY</h4>
+					</div>
+					<div class="asl">
+						<div class="side-assets">
+							<h3>ASSETS<span><?=$asset_count?></span></h3>
+						</div>
+						<div class="side-liability">
+							<h3>LIABILITY<span><?=$liability_count?></span></h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php base_url();?>img/customer-service.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="text-center">
+		2019 © Team Hygieia All Rights Reserved.
+	</footer>
+		<script src="<?php base_url();?>js/bootstrap.min.js"></script>
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
 <script>
 
 $(document).ready(()=>{
@@ -187,54 +336,6 @@ $(document).ready(()=>{
 		
 
 
-// $('.btn-danger').on('click',()=>{
 
-// $('form').on('submit',(e)=>{
-// e.preventDefault();
-
-// $.ajax({
-//     type:'POST',
-//     url:'<?php echo base_url();?>liabilities/remove_liability',
-//     dataType:'text',
-//     data:{
-//         liability_name:$()
-//     },
-//     beforeSend:()=>{
-//         $('.spinner-border').show();
-//         $('form').hide();
-//         $('.alert-box').html('');
-//     },
-    
-//     success:(data)=>{
-//         //console.log(data);
-//         function succession(){
-//             let result=JSON.parse(data);
-//             $('.spinner-border').hide();
-            
-            
-//             if(result['success'] !== ''){
-//                 $('form').show();
-//                 $('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
-//                 location.reload();
-//             }else{
-//                 $('form').show();
-//                 $('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');
-//             }
-//         }
-//         setTimeout(succession,3000);
-        
-//     },
-//     error:(err)=>{
-//         $('.spinner-border').hide();
-//         $('form').show();
-//         console.log(err);
-//     }
-// })
-
-// })
-
-
-
-// })
 
 </script>

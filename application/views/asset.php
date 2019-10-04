@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Assets</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/styles.css">
 
@@ -125,6 +125,156 @@
 </html>
 
 
+ -->
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Hygieia-NetWorth Calculator</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/index.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css"> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+		<div class="container-flex">
+			<div class="row holder">
+				<div class="col-sm-3 left">
+					<div class="title">
+						<div class="title-btn">
+							<h3>Hygieia NW Calc</h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					
+					<hr style="margin-top: 105px;">
+					<div class="navigation">
+						<ul class="nav nav-pills nav-stacked">
+							<a href="<?php echo base_url();?>asset/overview"><li><img src="<?php echo base_url();?>img/overview.png" class="img-icon"> Overview</li></a>
+							<a href="<?php echo base_url();?>asset"><li class="active"><img src="<?php echo base_url();?>img/assets.png" class="img-icon">Asset</li></a>
+							<a href="<?php echo base_url();?>liabilities"><li><img src="<?php echo base_url();?>img/liab.png" class="img-icon">Liabilities</li></a>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 mid">
+					<div class="title2">
+						<h3>ASSETS</h3>
+						<hr class="hr">
+					</div>
+					
+						<div class="total">
+							<h4 style="font-weight: normal;">Add your current assets.</h4>
+						</div>
+					<div class="row heading">
+						<div class="col-sm-12">
+							<div class="alert-box">
+						
+							</div>
+							<div class="spinner-border text-primary text-center" role="status">
+								<span class="sr-only">Signing you up...</span>
+							</div>
+
+
+							<div class="form" style="text-align: center;">
+								<form  method="post" class="form-inline">
+									<div class="form-group">
+										<input type="text" class="form-control" id="asset_name" name="asset_name" placeholder="Asset Name">
+									</div>
+									<div class="form-group">
+										<input type= "Number" class="form-control" id="asset_value" name="asset_value" placeholder="Asset value">
+									</div>
+									<button class="btn" name="submit" id="add" style="background: #257BFF; color: white;">ADD</button>
+								</form>
+							</div>
+						</div>
+						<div class="col-sm-12 net">
+								<h3>TOTAL ASSET VALUE <span><span class="naira">N</span><?=$total_asset?></span></h3>
+						</div>
+						<div class="col-sm-12 tab">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover text-center">
+									<tr class="tr-1">
+										<th>ITEMS</th>
+										<th>VALUE</th>
+										<th>DATE</th>
+									</tr>
+									
+									
+									<?php if (!empty($assets)): ?>
+									<?php foreach ($assets as $asset): ?>
+										<tr>
+											<td><?=$asset['asset_name']?></td>
+											<td><?=$asset['asset_value']?></td>
+											<td><?=$asset['date']?></td>
+											<td>
+											<form action="<?php echo base_url();?>asset/remove_asset" method="POST">
+											<input type="text" hidden name="asset_name"  value="<?=$asset['asset_name']?>">
+											<button class="btn btn-danger" id="<?=$asset['asset_name']?>">DELETE</button>
+											</form>
+											
+											</td>
+
+										</tr>
+										<?php endforeach; ?>
+										<?php else: ?>
+										<p>You have no assets yet</p>
+										<?php endif; ?>
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>																
+				<div class="col-sm-3">
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php echo base_url();?>img/userpic.png">
+					</div>
+					<div class = "user text-center">
+						<h4><?php echo $name?></h4>
+						<h5><?php echo $email?></h5>
+						<button class="btn"><a href="<?php base_url();?>auth/logout">Logout</a></button>
+					</div>
+					<hr>
+					<div class="sum">
+						<h4>SUMMARY</h4>
+					</div>
+					<div class="asl">
+						<div class="side-assets">
+							<h3>ASSETS<span><?=$asset_count?></span></h3>
+						</div>
+						<div class="side-liability">
+							<h3>LIABILITY<span><?=$liability_count?></span></h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php echo base_url();?>img/customer-service.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="text-center">
+		2019 © Team Hygieia All Rights Reserved.
+	</footer>
+		<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
+	</body>
+	
+</html>
+
+
+
+
 <script>
 		$(document).ready(()=>{
 			$('.spinner-border').hide();
@@ -185,51 +335,6 @@
 
 
 
-// 	$('.btn-danger').on('click',()=>{
-
-// 		$('form').on('submit',(e)=>{
-// 		e.preventDefault();
-
-// 		$.ajax({
-// 			type:'POST',
-// 			url:'<?php echo base_url();?>asset/remove_asset',
-// 			dataType:'text',
-// 			data:$('form').serialize(),
-// 			beforeSend:()=>{
-// 				$('.spinner-border').show();
-// 				$('form').hide();
-// 				$('.alert-box').html('');
-// 			},
-			
-// 			success:(data)=>{
-// 				//console.log(data);
-// 				function succession(){
-// 					let result=JSON.parse(data);
-// 					$('.spinner-border').hide();
-					
-					
-// 					if(result['success'] !== ''){
-// 						$('form').show();
-// 						$('.alert-box').html('<div class="alert alert-success" role="alert">'+result['success']+'</div>');
-// 						location.reload();
-// 					}else{
-// 						$('form').show();
-// 						$('.alert-box').html('<div class="alert alert-danger" role="alert">'+result['error']+'</div>');
-// 					}
-// 				}
-// 				setTimeout(succession,3000);
-				
-// 			},
-// 			error:(err)=>{
-// 				$('.spinner-border').hide();
-// 				$('form').show();
-// 				console.log(err);
-// 			}
-// 		})
-
-// 		})
 
 
-
-// })
 </script>
