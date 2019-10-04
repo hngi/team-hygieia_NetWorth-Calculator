@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -101,4 +101,115 @@
 	</div>
 
 </body>
+</html>
+ -->
+
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Hygieia-NetWorth Calculator</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/index.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
+		
+		<script src="https://use.fontawesome.com/3ebef00a3f.js"></script>
+	</head>
+	<body>
+		<div class="container-flex">
+			<div class="row holder">
+				<div class="col-sm-3 left">
+					<div class="title">
+						<div class="title-btn">
+							<h3>Hygieia NW Calc</h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					
+					<hr style="margin-top: 105px;">
+					<div class="navigation">
+						<ul class="nav nav-pills nav-stacked">
+							<a href="<?php echo base_url();?>asset/overview"><li class="active"><img src="<?php echo base_url();?>img/overview.png" class="img-icon"> Overview</li></a>
+							<a href="<?php echo base_url();?>asset"><li><img src="<?php echo base_url();?>img/assets.png" class="img-icon">Asset</li></a>
+							<a href="<?php echo base_url();?>liabilities"><li><img src="<?php echo base_url();?>img/liab.png" class="img-icon">Liabilities</li></a>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 mid">
+					<div class="title2">
+						<h3>OVERVIEW</h3>
+						<hr class="hr">
+					</div>
+					
+						<div class="total">
+							<h4>Total</h4>
+						</div>
+					<div class="row heading">
+						<div class="col-sm-6 asset">
+							<h5>Asset</h5>
+							<hr class="hr">
+							<div class="currency">
+								<i></i><h3><?=$total_asset?></h3>
+								<br>
+								<a href="<?php echo base_url()?>asset">Show Details</a>
+							</div>
+						</div>
+						<div class="col-sm-6 liability">
+							<h5>Liability</h5>
+							<hr class="hr">
+							<div class="currency">
+								<i></i><h3><?=$total_liability?></h3>
+								<br>
+								<a href="<?php echo base_url()?>liablities">Show Details</a>
+							</div>
+						</div>
+						<div class="col-sm-12 net">
+								<h3>NET WORTH <span><span class="naira"></span><?=$net_worth?></span></h3>
+								
+						</div>
+						<div class="col-sm-12 tab">
+							<button class="btn "><a href="<?php echo base_url();?>asset/generate_report">Generate Report</a></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php echo base_url();?>img/userpic.png">
+					</div>
+					<div class = "user text-center">
+						<h4><?php echo $name;?></h4>
+						<h5><?php echo $email;?></h5>
+						<button class="btn" ><a href="<?php echo base_url(); ?>auth/logout">Logout</a></button>
+					</div>
+					<hr>
+					<div class="sum">
+						<h4>SUMMARY</h4>
+					</div>
+					<div class="asl">
+						<div class="side-assets">
+							<h3>ASSETS<span><?=$asset_count?></span></h3>
+						</div>
+						<div class="side-liability">
+							<h3>LIABILITY<span><?=$liability_count?></span></h3>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="profile">
+						<img class="img-responsive text-center" src="<?php echo base_url();?>img/customer-service.png">
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="text-center">
+		2019 © Team Hygieia All Rights Reserved.
+	</footer>
+		<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
+	</body>
+	
 </html>
