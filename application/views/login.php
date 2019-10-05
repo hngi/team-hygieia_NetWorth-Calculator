@@ -14,6 +14,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Poppins|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
+
+    <style>
+        .or{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .bar{
+            flex: auto;
+            border: none;
+            height: 1px;
+            background: #aaa;
+        }
+
+        .or span{
+            padding: 0 0.8rem;
+        }
+    </style>
+
 </head>
 <body>
    <div class="container-fluid">
@@ -53,11 +73,17 @@
                         </div>
                     </div>
                     <div class="forgot text-right">
-                         <a href="">Forgot Password?</a>
+                         <a href="<?php echo base_url();?>auth/forgot_password">Forgot Password?</a>
                     </div>
                     <div class="sign-in">
                         <button class="btn btn-primary btn-block">Login</button>
                     </div>
+                    <div class="or">
+                            <hr class="bar">
+                                <span>OR</span>
+                            <hr class="bar">
+                        </div>
+                        <button class="btn btn-outline-primary btn-block"> <a href="<?php echo $google_url;?>"> Sign in with Google</a> </button>
                     <div class="sign-up text-center">
                         <p>Don't have an account? <a href="<?php echo base_url()?>auth/register"><span class="sign">Sign Up</span></a></p>
                     </div>
