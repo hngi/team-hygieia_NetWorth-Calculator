@@ -323,7 +323,7 @@
             $this->db->where('email', $query[0]['email']);
             $result=$this->db->update('users', ['password'=>$query[0]['password']]);
        
-            //print_r($query);
+            
             redirect(base_url());
 
            }
