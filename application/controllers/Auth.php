@@ -32,8 +32,11 @@
 
                 if(!($this->session->userdata('logged_in'))){
                 if(empty($this->input->post('email')) || empty($this->input->post('password'))){
-
-                    $this->load->view('login');
+                    $data=[
+                        'google_url'=>$this->google->getLoginUrl(),
+                        
+                    ];
+                    $this->load->view('login',$data);
                 }else{
 
                     $email=xss_clean($this->input->post('email'));
@@ -239,6 +242,155 @@
             }
 
         
+    }
+
+    public function forgot_password(){
+
+        if ($this->input->post('email')==NULL || empty($this->input->post('email')) || $this->input->post('name')==NULL || empty($this->input->post('name'))) {
+            
+            $this->load->view('forgot');
+            
+        }
+        else {
+            
+            if($this->auth_model->check_if_user_exists($this->input->post('name'),$this->input->post('email'))){
+                $email=$this->input->post('email');
+                $password=$this->input->post('password');
+                $name=$this->input->post('name');
+                $result=$this->db->get_where('users',['email'=>$email])->result_array();
+                $uid=$result[0]['user_id'];
+                $verification_id=sha1(time());
+                
+                $to=$email;
+                $subject="Password Reset";
+                $message="
+                    <html>
+        
+                        Hello, Please click on the link below to reset your password
+                        <a href='http://localhost/net_worth/auth/change_password/". $verification_id."'>click!</a>
+                        </html>
+                        ";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";        
+                
+                        if (/*mail($to,$subject,$message,$headers)*/TRUE) {
+                            $input=[
+                                'user_id'=>$uid,
+                                'email'=>$email,
+                                'verification_id'=>$verification_id,
+                                'password'=>do_hash($password)
+                            ];
+                            $this->db->delete('forgot',['user_id'=>$uid]);
+                           $this->db->insert('forgot',$input);
+                            $data=[
+                                'error'=>'',
+                                'success'=>'A verification email has been sent to you'
+                            ];
+
+                            echo json_encode($data);
+                        }
+
+            }else{
+                $data=[
+                    'success'=>'',
+                    'error'=>"Invalid Credentials"
+                ];
+                echo json_encode($data);
+            }
+            
+        }
+    }
+
+    public function change_password($verification_id){
+
+        if(empty($verification_id) || $verification_id==NULL){
+            redirect(base_url());
+        }else{
+           $query= $this->db->get('forgot',['verification_id'=>$verification_id])->result_array(); 
+            //echo json_encode($query);
+           if (empty($query) ||$query==NULL) {
+               
+                redirect(base_url());
+
+           }else{
+
+            $data = array(
+                'password' => $query[0]['password']
+        );
+            session_unset();
+            session_destroy();
+            $this->db->where('user_id', $query[0]['user_id']);
+            $this->db->where('email', $query[0]['email']);
+            $result=$this->db->update('users', ['password'=>$query[0]['password']]);
+       
+            
+            redirect(base_url());
+
+           }
+        }
+    }
+
+
+    public function google_login(){
+
+        if($this->session->userdata('logged_in')){
+
+            redirect(base_url());
+        }else{
+
+            if(isset($_GET['code'])){
+
+               
+
+                $info=$this->google->getUserInfo();
+                if (empty($this->db->get_where('users',['email'=>$info['email']]))) {
+                    
+
+                    $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
+
+                    $letters = str_split($abc);
+                    $user_id = "";
+                    for ($i=0; $i<=12; $i++) {
+                        $user_id .= $letters[rand(0, count($letters)-1)];
+                    }
+    
+                    $data=[
+                        'user_id'=>$user_id,
+                        'name'=>$info['name'],
+                        'email'=>$info['email'],
+                        'password'=>'google_auth',
+                        'verification_id'=>$verification_id
+                    ];
+        
+                    $query=$this->db->insert('users',$data);
+        
+                    if($query){
+                        
+                        $_SESSION['logged_in']=true;
+                        $_SESSION['user_id']=$result[0]['user_id'];
+                        redirect(base_url());
+                        
+                    }else{
+                     
+                        redirect(base_url());
+                    }
+
+                }else{
+
+                    $result=$this->db->get_where('users',['mail'=>$info['email']])->result_array();
+
+                    $_SESSION['logged_in']=true;
+                    $_SESSION['user_id']=$result[0]['user_id'];
+                    redirect(base_url());
+
+                }
+            }else{
+                redirect(base_url());
+            }
+        }
     }
     }
 ?>
