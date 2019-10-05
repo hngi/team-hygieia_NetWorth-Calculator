@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="forgot text-right">
-                         <a href="">Forgot Password?</a>
+                         <a href="<?php echo base_url();?>auth/forgot_password">Forgot Password?</a>
                     </div>
                     <div class="sign-in">
                         <button class="btn btn-primary btn-block">Login</button>

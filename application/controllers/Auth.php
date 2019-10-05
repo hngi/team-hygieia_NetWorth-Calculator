@@ -240,5 +240,94 @@
 
         
     }
+
+    public function forgot_password(){
+
+        if ($this->input->post('email')==NULL || empty($this->input->post('email')) || $this->input->post('name')==NULL || empty($this->input->post('name'))) {
+            
+            $this->load->view('forgot');
+            
+        }
+        else {
+            
+            if($this->auth_model->check_if_user_exists($this->input->post('name'),$this->input->post('email'))){
+                $email=$this->input->post('email');
+                $password=$this->input->post('password');
+                $name=$this->input->post('name');
+                $result=$this->db->get_where('users',['email'=>$email])->result_array();
+                $uid=$result[0]['user_id'];
+                $verification_id=sha1(time());
+                
+                $to=$email;
+                $subject="Password Reset";
+                $message="
+                    <html>
+        
+                        Hello, Please click on the link below to reset your password
+                        <a href='http://localhost/net_worth/auth/change_password/". $verification_id."'>click!</a>
+                        </html>
+                        ";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";        
+                
+                        if (/*mail($to,$subject,$message,$headers)*/TRUE) {
+                            $input=[
+                                'user_id'=>$uid,
+                                'email'=>$email,
+                                'verification_id'=>$verification_id,
+                                'password'=>do_hash($password)
+                            ];
+                            $this->db->delete('forgot',['user_id'=>$uid]);
+                           $this->db->insert('forgot',$input);
+                            $data=[
+                                'error'=>'',
+                                'success'=>'A verification email has been sent to you'
+                            ];
+
+                            echo json_encode($data);
+                        }
+
+            }else{
+                $data=[
+                    'success'=>'',
+                    'error'=>"Invalid Credentials"
+                ];
+                echo json_encode($data);
+            }
+            
+        }
+    }
+
+    public function change_password($verification_id){
+
+        if(empty($verification_id) || $verification_id==NULL){
+            redirect(base_url());
+        }else{
+           $query= $this->db->get('forgot',['verification_id'=>$verification_id])->result_array(); 
+            //echo json_encode($query);
+           if (empty($query) ||$query==NULL) {
+               
+                redirect(base_url());
+
+           }else{
+
+            $data = array(
+                'password' => $query[0]['password']
+        );
+            session_unset();
+            session_destroy();
+            $this->db->where('user_id', $query[0]['user_id']);
+            $this->db->where('email', $query[0]['email']);
+            $result=$this->db->update('users', ['password'=>$query[0]['password']]);
+       
+            //print_r($query);
+            redirect(base_url());
+
+           }
+        }
+    }
     }
 ?>
