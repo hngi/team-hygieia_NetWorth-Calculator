@@ -32,8 +32,11 @@
 
                 if(!($this->session->userdata('logged_in'))){
                 if(empty($this->input->post('email')) || empty($this->input->post('password'))){
-
-                    $this->load->view('login');
+                    $data=[
+                        'google_url'=>$this->google->getLoginUrl(),
+                        
+                    ];
+                    $this->load->view('login',$data);
                 }else{
 
                     $email=xss_clean($this->input->post('email'));
@@ -327,6 +330,66 @@
             redirect(base_url());
 
            }
+        }
+    }
+
+
+    public function google_login(){
+
+        if($this->session->userdata('logged_in')){
+
+            redirect(base_url());
+        }else{
+
+            if(isset($_GET['code'])){
+
+               
+
+                $info=$this->google->getUserInfo();
+                if (empty($this->db->get_where('users',['email'=>$info['email']]))) {
+                    
+
+                    $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789";
+
+                    $letters = str_split($abc);
+                    $user_id = "";
+                    for ($i=0; $i<=12; $i++) {
+                        $user_id .= $letters[rand(0, count($letters)-1)];
+                    }
+    
+                    $data=[
+                        'user_id'=>$user_id,
+                        'name'=>$info['name'],
+                        'email'=>$info['email'],
+                        'password'=>'google_auth',
+                        'verification_id'=>$verification_id
+                    ];
+        
+                    $query=$this->db->insert('users',$data);
+        
+                    if($query){
+                        
+                        $_SESSION['logged_in']=true;
+                        $_SESSION['user_id']=$result[0]['user_id'];
+                        redirect(base_url());
+                        
+                    }else{
+                     
+                        redirect(base_url());
+                    }
+
+                }else{
+
+                    $result=$this->db->get_where('users',['mail'=>$info['email']])->result_array();
+
+                    $_SESSION['logged_in']=true;
+                    $_SESSION['user_id']=$result[0]['user_id'];
+                    redirect(base_url());
+
+                }
+            }else{
+                redirect(base_url());
+            }
         }
     }
     }
